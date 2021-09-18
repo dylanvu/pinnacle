@@ -140,3 +140,9 @@ while running:
 
     # Flip the display
     pygame.display.flip()
+
+
+# Step 1: Boot up Pygame screen
+# Step 2: Display points
+# Step 3: get perspective matrix
+# Step 4: Get frames and apply perspective matrix
