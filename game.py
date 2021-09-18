@@ -23,8 +23,8 @@ perspectiveMatrix = None
 # SCREEN_HEIGHT = 1000
 # SCREEN_WIDTH = 1850
 
-SCREEN_HEIGHT = 720
-SCREEN_WIDTH = 480
+SCREEN_HEIGHT = 480
+SCREEN_WIDTH = 720
 
 # Define opencv frame size
 
