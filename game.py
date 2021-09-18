@@ -116,6 +116,10 @@ while running:
                         DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
                         pygame.display.flip()
                         calibrated = True
+                        print(topLeftdot)
+                        print(topRightdot)
+                        print(bottomLeftdot)
+                        print(bottomRightdot)
                         perspectiveMatrix = CorrectWarping(topLeftdot, topRightdot, bottomLeftdot, bottomRightdot)
     else:
         # After we are done calibrating, we have our main drawing and detection stuff
@@ -124,6 +128,7 @@ while running:
         ust = ust[y:y+h, x:x+w]
 
         # correct warping
+        print(ust)
         outputFrame = cv2.warpPerspective(frame, perspectiveMatrix, FRAMESIZE)
         cv2.imshow(outputFrame)
         ((cX,cY),color) = centroidScript(outputFrame)
