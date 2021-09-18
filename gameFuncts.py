@@ -17,3 +17,8 @@ def InterpolatePoints(screen, color, x1, y1, x2, y2, thickness):
 
     # Maybe: create circles instead? Make smoother on edges of interpolation
     # Check if we're moving to the left/right and up/down and don't draw depending on the direction
+
+def Pan(screen, xshift, yshift, fillColor):
+    temp_surf = pygame.Surface.copy(screen)
+    screen.fill(fillColor)
+    screen.blit(temp_surf, (xshift, yshift))

@@ -3,9 +3,6 @@ import cv2
 import numpy as np
 from gameFuncts import *
 
-
-CHECKERBOARD = (3,)
-
 # Set the pygame window size
 SCREEN_HEIGHT = 1000
 SCREEN_WIDTH = 1850
@@ -26,6 +23,17 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        
+        if event.type == pygame.KEYDOWN:
+            # Panning
+            if event.key == pygame.K_LEFT:
+                Pan(screen, -10, 0, BACKGROUND_COLOR)
+            if event.key == pygame.K_RIGHT:
+                Pan(screen, 10, 0, BACKGROUND_COLOR)
+            if event.key == pygame.K_UP:
+                Pan(screen, 0, -10, BACKGROUND_COLOR)
+            if event.key == pygame.K_DOWN:
+                Pan(screen, 0, 10, BACKGROUND_COLOR)
             
 
     # Check for mouse down and draw if pressed
