@@ -1,5 +1,10 @@
 import pygame
+import cv2
+import numpy as np
 from gameFuncts import *
+
+
+CHECKERBOARD = (3,)
 
 # Set the pygame window size
 SCREEN_HEIGHT = 1000
