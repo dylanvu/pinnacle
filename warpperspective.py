@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def CorrectWarping(frame, topLeft, topRight, bottomLeft, bottomRight):
+def CorrectWarping(topLeft, topRight, bottomLeft, bottomRight):
 
     topLeftx = topLeft(0)
     topLefty = topLeft(1)
@@ -21,5 +21,4 @@ def CorrectWarping(frame, topLeft, topRight, bottomLeft, bottomRight):
     points2 = np.float32([[0,0], [correctWidth, 0], [0, correctHeight], [correctWidth,correctHeight]])
 
     correctedMatrix = cv2.getPerspectiveTransform(points1, points2)
-    outputFrame = cv2.warpPerspective(frame, correctedMatrix, (correctWidth,correctHeight))
-    return outputFrame
+    return correctedMatrix
