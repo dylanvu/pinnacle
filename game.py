@@ -11,11 +11,13 @@ screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 BACKGROUND_COLOR = pygame.Color(251, 251, 248)
 BLACK = pygame.Color(0, 0, 0)
+RED = pygame.Color(255, 0, 0)
 
 # Intialize all relevant variables for the game
 running = True
 mouse = pygame.mouse.get_pos()
 prevMouse = pygame.mouse.get_pos()
+calibrated = False
 
 screen.fill(BACKGROUND_COLOR)
 
@@ -35,6 +37,13 @@ while running:
             if event.key == pygame.K_DOWN:
                 Pan(screen, 0, 10, BACKGROUND_COLOR)
             
+
+    if (not calibrated):
+        calibrationRadius = 20
+        DrawDot(screen, RED, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+        DrawDot(screen, RED, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
+        DrawDot(screen, RED, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+        DrawDot(screen, RED, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
 
     # Check for mouse down and draw if pressed
     if pygame.mouse.get_pressed()[0]:
