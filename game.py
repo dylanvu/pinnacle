@@ -19,9 +19,12 @@ newCameraMatrix, roi = cv2. getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h),
 perspectiveMatrix = None
 
 
-# Set the pygame window size
-SCREEN_HEIGHT = 1000
-SCREEN_WIDTH = 1850
+# # Set the pygame window size
+# SCREEN_HEIGHT = 1000
+# SCREEN_WIDTH = 1850
+
+SCREEN_HEIGHT = 720
+SCREEN_WIDTH = 480
 
 # Define opencv frame size
 
@@ -76,6 +79,9 @@ while running:
                 Pan(screen, 0, -10, BACKGROUND_COLOR)
             if event.key == pygame.K_DOWN:
                 Pan(screen, 0, 10, BACKGROUND_COLOR)
+            if event.key == pygame.K_q:
+                cv2.destroyAllWindows()
+                running = False
 
     if (not calibrated):
         calibrationRadius = 20
