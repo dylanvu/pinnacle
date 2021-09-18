@@ -37,11 +37,7 @@ for filename in images:
     # Find the chess board corners
     # If desired number of corners are
     # found in the image then ret = true
-    ret, corners = cv2.findChessboardCorners(
-                    grayColor, CHECKERBOARD,
-                    cv2.CALIB_CB_ADAPTIVE_THRESH
-                    + cv2.CALIB_CB_FAST_CHECK +
-                    cv2.CALIB_CB_NORMALIZE_IMAGE)
+    ret, corners = cv2.findChessboardCorners(grayColor, CHECKERBOARD, cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK + cv2.CALIB_CB_NORMALIZE_IMAGE)
 
     # If desired number of corners can be detected then,
     # refine the pixel coordinates and display
@@ -51,8 +47,7 @@ for filename in images:
 
         # Refining pixel coordinates
         # for given 2d points.
-        corners2 = cv2.cornerSubPix(
-            grayColor, corners, (11, 11), (-1, -1), criteria)
+        corners2 = cv2.cornerSubPix(grayColor, corners, (11, 11), (-1, -1), criteria)
 
         twodpoints.append(corners2)
 

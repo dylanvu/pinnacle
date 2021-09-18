@@ -5,6 +5,7 @@ imgCount = 0 # Number of images
 
 while(True):
     ret,frame = cap.read() # return a single frame in variable `frame`
+    # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     cv2.imshow('Capturing Video',frame) #display the captured image
     key = cv2.waitKey(1) & 0xFF
     if key == ord('y'): # exit on pressing 'y' 
