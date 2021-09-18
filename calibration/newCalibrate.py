@@ -8,8 +8,8 @@ import glob
 
 ################ FIND CHESSBOARD CORNERS - OBJECT POINTS AND IMAGE POINTS #############################
 
-chessboardSize = (5,5)
-frameSize = (640,480)
+chessboardSize = (7,5)
+frameSize = (1280,720)
 
 
 
@@ -38,7 +38,6 @@ for image in images:
 
     # If found, add object points, image points (after refining them)
     if ret == True:
-        print("RET")
         objpoints.append(objp)
         corners2 = cv.cornerSubPix(gray, corners, (11,11), (-1,-1), criteria)
         imgpoints.append(corners)
@@ -56,13 +55,9 @@ cv.destroyAllWindows()
 
 ############## CALIBRATION #######################################################
 
-print(objpoints)
-print(imgpoints)
-print(frameSize)
-
 ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, frameSize, None, None)
 
 # Export camera Matrix and distortion parameters
 
-print(cameraMatrix)
-print(dist)
+np.savetxt("camera_matrix.txt", cameraMatrix)
+np.savetxt("distortion.txt", dist)
