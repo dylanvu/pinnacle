@@ -1,8 +1,8 @@
 import cv2
 import time
 
-from picamera.array import PiRGBArray
-from picamera import PiCamera
+# from picamera.array import PiRGBArray
+# from picamera import PiCamera
 
 # camera = PiCamera()
 # camSize = (640, 480)
@@ -13,7 +13,7 @@ from picamera import PiCamera
 
 # time.sleep(0.1)
 
-cap = cv2.VideoCapture(0) # video capture source camera (Here webcam of laptop) 
+cap = cv2.VideoCapture(1) # video capture source camera (alternative webcam of laptop) 
 
 imgCount = 0 # Number of images
 
@@ -40,7 +40,7 @@ while(True):
         cv2.destroyAllWindows()
         break
     if key == ord('c'): # save picture on pressing 'c' 
-        cv2.imwrite(str(imgCount) + ".jpg",frame)
+        cv2.imwrite(str(imgCount) + "new.jpg",frame)
         imgCount += 1
 
 cap.release()
