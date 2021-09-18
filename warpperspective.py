@@ -3,17 +3,17 @@ import numpy as np
 
 def CorrectWarping(topLeft, topRight, bottomLeft, bottomRight):
 
-    topLeftx = topLeft(0)
-    topLefty = topLeft(1)
+    topLeftx = topLeft[0]
+    topLefty = topLeft[1]
 
-    topRightx = topRight(0)
-    topRighty = topRight(1)
+    topRightx = topRight[0]
+    topRighty = topRight[1]
 
-    bottomLeftx = bottomLeft(0)
-    bottomLefty = bottomLeft(1)
+    bottomLeftx = bottomLeft[0]
+    bottomLefty = bottomLeft[1]
 
-    bottomRightx = bottomRight(0)
-    bottomRighty = bottomRight(1)
+    bottomRightx = bottomRight[0]
+    bottomRighty = bottomRight[1]
 
     correctWidth, correctHeight = 1280,720
 

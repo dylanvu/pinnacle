@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import time
 #will output x,y,colorString
-def centroidScript():
+def centroidScript(frame):
     lower_color_green = (10, 100, 35) #BGR
     upper_color_green = (35,255,90)
     maskGreen = cv2.inRange(frame,lower_color_green,upper_color_green)
@@ -41,7 +41,7 @@ def centroidScript():
     except:
         cX = -1
         cY = -1
-    print(countG,countR)
+    # print(countG,countR)
     if countG > 1:
         return((cX,cY),"green")
     elif countR > 1:
