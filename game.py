@@ -165,7 +165,7 @@ while running:
         currPt = (cX, cY)
         if (currPt == (None, None)):
             noneCounter += 1
-            if (noneCounter >= 16):
+            if (noneCounter >= 10):
                 prevPt = (None, None)
         else:
             noneCounter = 0
