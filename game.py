@@ -43,8 +43,6 @@ perspectiveMatrix = HardCorrectWarping(SCREEN_DIMS)
 FRAMESIZE = (1080,720)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-drawScreen = pygame.Surface([SCREEN_WIDTH,SCREEN_HEIGHT], pygame.SRCALPHA, 32)
-drawScreen = drawScreen.convert_alpha()
 
 # BACKGROUND_COLOR = pygame.Color(251, 251, 248)
 BACKGROUND_COLOR = pygame.Color(0, 0, 0)
@@ -78,8 +76,8 @@ fillAftercalibrate = False
 
 screen.fill(BACKGROUND_COLOR)
 sentence = pygame.image.load("sentence.bmp")
-sentence = pygame.transform.scale(sentence, (int(SCREEN_WIDTH / 1.2), int(SCREEN_HEIGHT / 1.2)))
-screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
+sentence = pygame.transform.scale(sentence, SCREEN_DIMS)
+screen.blit(sentence, (0, 0))
 # cv2.imshow("pain", frame)
 while running:
 
@@ -171,15 +169,14 @@ while running:
         else:
             if (color == "red"):
                 # If red is detected, draw
-                InterpolatePoints(drawScreen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
-                sentence.blit(drawScreen, (0, 0))
-                screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
+                InterpolatePoints(sentence, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
+                screen.blit(sentence, (0,0))
                 pygame.display.flip()
                 prevPt = currPt
             elif (color == "green"):
                 # If green is detected, erase
                 screen.fill(BACKGROUND_COLOR)
-                screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
+                screen.blit(sentence, (0,0))
                 # InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
                 # pygame.display.flip()
                 # prevPt = currPt
