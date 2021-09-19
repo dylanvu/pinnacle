@@ -75,6 +75,8 @@ bottomRightcalibrate = False
 fillAftercalibrate = False
 
 screen.fill(BACKGROUND_COLOR)
+sentence = pygame.image.load("sentence.png")
+screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
 # cv2.imshow("pain", frame)
 while running:
 
@@ -172,6 +174,7 @@ while running:
             elif (color == "green"):
                 # If green is detected, erase
                 screen.fill(BACKGROUND_COLOR)
+                screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
                 # InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
                 # pygame.display.flip()
                 # prevPt = currPt
