@@ -2,6 +2,7 @@ from turtle import color
 import pygame
 import cv2
 import time
+import math
 import numpy as np
 from gameFuncts import *
 from centroidScript import *
@@ -166,18 +167,18 @@ while running:
                 prevPt = currPt
         else:
             # Threshold for jumping points
-            # if (not (abs(currPt - prevPt) > 30)):
-            #     if (not (tuple(map(lambda i, j: i - j, currPt, prevPt)))):
-            if (color == "red"):
-                # If red is detected, draw
-                InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
-                pygame.display.flip()
-                prevPt = currPt
-            elif (color == "green"):
-                # If green is detected, erase
-                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
-                pygame.display.flip()
-                prevPt = currPt
+            if (not (math.sqrt(((currPt[0] - prevPt[0])^2 + (prevPt[1] - prevPt[1])^2)) > 30)):
+                # If the distance between the two jumps is less than 30 in between two frames, draw/erase
+                if (color == "red"):
+                    # If red is detected, draw
+                    InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
+                    pygame.display.flip()
+                    prevPt = currPt
+                elif (color == "green"):
+                    # If green is detected, erase
+                    InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
+                    pygame.display.flip()
+                    prevPt = currPt
 
     if (fillAftercalibrate):
         screen.fill(BACKGROUND_COLOR)
