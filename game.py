@@ -12,7 +12,7 @@ from hardcodewarp import *
 
 # Variables to change on setup
 
-calibrated = False
+calibrated = True
 SCREEN_HEIGHT = 480
 SCREEN_WIDTH = 720
 SCREEN_DIMS = (SCREEN_WIDTH, SCREEN_HEIGHT)
