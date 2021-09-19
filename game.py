@@ -163,7 +163,7 @@ while running:
         #     noneCounter += 1
         #     if (noneCounter > 10):
         #         prevPt = (None, None
-        if (prevPt == (None, None)):
+        if (prevPt == (None, None) and currPt != (None, None)):
                 prevPt = currPt
         else:
             # Threshold for jumping points
