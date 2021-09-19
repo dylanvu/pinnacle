@@ -163,6 +163,8 @@ while running:
         #EMERGENCY PRINT
         # print(((cX,cY),color))
         currPt = (cX, cY)
+        if (currPt == (None, None)):
+            prevPt = (None, None)
         # if (currPt != (None, None)):
         #     if (prevPt == (None, None)):
         #             prevPt = currPt
