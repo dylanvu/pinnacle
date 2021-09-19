@@ -8,7 +8,7 @@ from gameFuncts import *
 from centroidScript import *
 from CalibrateDot import *
 from warpperspective import *
-# from hardcodewarp import *
+from hardcodewarp import *
 
 # OpenCV setup
 cap = cv2.VideoCapture(0)
@@ -19,7 +19,7 @@ ret,frame = cap.read() # return a single frame in variable `frame`
 # cv2.imshow("shit", frame)
 h,w = frame.shape[:2]
 newCameraMatrix, roi = cv2. getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h),1, (w,h))
-perspectiveMatrix = None
+perspectiveMatrix = HardCorrectWarping()
 
 
 # # Set the pygame window size
@@ -154,9 +154,10 @@ while running:
 
         # correct warping
 #         print(ust)
-#         outputFrame = cv2.warpPerspective(ust, perspectiveMatrix, FRAMESIZE)
+        outputFrame = cv2.warpPerspective(ust, perspectiveMatrix, FRAMESIZE)
 #         cv2.imshow("output",outputFrame)
-        ((cX,cY),color) = centroidScript(ust) #outputFrame
+        # ((cX,cY),color) = centroidScript(ust) # for no warping
+        ((cX,cY),color) = centroidScript(outputFrame) # for warping
 #         cv2.imshow("frame",ust)
         print(((cX,cY),color))
         currPt = (cX, cY)
