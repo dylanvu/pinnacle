@@ -75,9 +75,6 @@ bottomRightcalibrate = False
 fillAftercalibrate = False
 
 screen.fill(BACKGROUND_COLOR)
-sentence = pygame.image.load("darksentence.bmp")
-sentence = pygame.transform.scale(sentence, SCREEN_DIMS)
-screen.blit(sentence, (0, 0))
 # cv2.imshow("pain", frame)
 while running:
 
@@ -169,14 +166,12 @@ while running:
         else:
             if (color == "red"):
                 # If red is detected, draw
-                InterpolatePoints(sentence, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
-                screen.blit(sentence, (0,0))
+                InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
                 pygame.display.flip()
                 prevPt = currPt
             elif (color == "green"):
                 # If green is detected, erase
                 screen.fill(BACKGROUND_COLOR)
-                screen.blit(sentence, (0,0))
                 # InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
                 # pygame.display.flip()
                 # prevPt = currPt
@@ -185,9 +180,9 @@ while running:
     #     screen.fill(BACKGROUND_COLOR)
     #     fillAftercalibrate = False
 
-    if pygame.mouse.get_pressed()[0]:
-        cv2.destroyAllWindows()
-        running = False
+    # if pygame.mouse.get_pressed()[0]:
+    #     cv2.destroyAllWindows()
+    #     running = False
 
     # Flip the display
     pygame.display.flip()
