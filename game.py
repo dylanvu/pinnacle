@@ -24,7 +24,6 @@ cameraMatrix = np.genfromtxt("./calibration/camera_matrix.txt")
 dist = np.genfromtxt("./calibration/distortion.txt")
 ret,frame = cap.read() # return a single frame in variable `frame`
     # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-# cv2.imshow("shit", frame)
 h,w = frame.shape[:2]
 newCameraMatrix, roi = cv2. getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h),1, (w,h))
 perspectiveMatrix = HardCorrectWarping(SCREEN_DIMS)
