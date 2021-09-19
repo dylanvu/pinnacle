@@ -49,6 +49,7 @@ running = True
 prevPt = (None, None)
 currPt = (None, None)
 calibrated = True
+noneCounter = 0
 
 # for calibration purposes
 topLeftdot = (None,None)
@@ -74,14 +75,16 @@ while running:
         
         if event.type == pygame.KEYDOWN:
             # Panning
-            if event.key == pygame.K_LEFT:
-                Pan(screen, -10, 0, BACKGROUND_COLOR)
-            if event.key == pygame.K_RIGHT:
-                Pan(screen, 10, 0, BACKGROUND_COLOR)
+            # if event.key == pygame.K_LEFT:
+            #     Pan(screen, -10, 0, BACKGROUND_COLOR)
+            # if event.key == pygame.K_RIGHT:
+            #     Pan(screen, 10, 0, BACKGROUND_COLOR)
+            # if event.key == pygame.K_UP:
+            #     Pan(screen, 0, -10, BACKGROUND_COLOR)
+            # if event.key == pygame.K_DOWN:
+            #     Pan(screen, 0, 10, BACKGROUND_COLOR)
             if event.key == pygame.K_UP:
-                Pan(screen, 0, -10, BACKGROUND_COLOR)
-            if event.key == pygame.K_DOWN:
-                Pan(screen, 0, 10, BACKGROUND_COLOR)
+                screen.fill(BACKGROUND_COLOR)
             if event.key == pygame.K_q:
                 cv2.destroyAllWindows()
                 running = False
@@ -155,15 +158,24 @@ while running:
 #         cv2.imshow("frame",ust)
         print(((cX,cY),color))
         currPt = (cX, cY)
+        # if (currPt == (None, None)):
+        #     noneCounter += 1
+        #     if (noneCounter > 10):
+        #         prevPt = (None, None
         if (prevPt == (None, None)):
                 prevPt = currPt
         else:
+            # Threshold for jumping points
+            # if (not (abs(currPt - prevPt) > 30)):
+            #     if (not (tuple(map(lambda i, j: i - j, currPt, prevPt)))):
             if (color == "red"):
+                # If red is detected, draw
                 InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
                 pygame.display.flip()
                 prevPt = currPt
             elif (color == "green"):
-                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 10)
+                # If green is detected, erase
+                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
                 pygame.display.flip()
                 prevPt = currPt
 
@@ -171,28 +183,5 @@ while running:
         screen.fill(BACKGROUND_COLOR)
         fillAftercalibrate = False
 
-    # Check for mouse down and draw if pressed
-    # if pygame.mouse.get_pressed()[0]:
-    #     InterpolatePoints(screen, BLACK, prevMouse[0], prevMouse[1], mouse[0], mouse[1], 5)
-
-    # Once we receive coordinates:
-    # if (existsCoordinates) and (draw):
-    #     DrawDot(screen, BLACK, x coord, y coord, 10)
-
-    # if (existsCoordinates) and (erase):
-    #     DrawDot(screen, ERASE COLOR, x coord, y coord, 10)
-
-    # Save previous mouse and get new mouse for interpolation of points
-    # prevMouse = mouse
-    # mouse = pygame.mouse.get_pos()
-    
-
-    # cv2.imshow('Capturing Video',ust) #display the captured image
-
     # Flip the display
     pygame.display.flip()
-# Step 1: Boot up Pygame screen
-# Step 2: Apply camera matrix
-# Step 2: Display points
-# Step 3: get perspective matrix
-# Step 4: Get frames and apply perspective matrix
