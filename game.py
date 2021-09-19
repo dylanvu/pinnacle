@@ -164,7 +164,7 @@ while running:
                     prevPt = currPt
             else:
                 # Threshold for jumping points
-                if (not (math.sqrt(((currPt[0] - prevPt[0])**2 + (currPt[1] - prevPt[1])**2)) > 30)):
+                if (not (math.sqrt(((currPt[0] - prevPt[0])**2 + (currPt[1] - prevPt[1])**2)) < 30)):
                     # If the distance between the two jumps is less than 30 in between two frames, draw/erase
                     if (color == "red"):
                         # If red is detected, draw
