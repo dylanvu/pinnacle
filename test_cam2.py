@@ -74,7 +74,7 @@ while(True):
     print(countG,countR)
     if countG > 20:
         print(cX,cY,"green")
-    elif countR > 4:
+    elif countR > 1:
         print(cX,cY,"red")
     else:
         print(cX,cY,"none")
