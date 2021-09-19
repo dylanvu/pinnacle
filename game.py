@@ -159,23 +159,39 @@ while running:
 #         cv2.imshow("frame",ust)
         print(((cX,cY),color))
         currPt = (cX, cY)
-        if (currPt != (None, None)):
-            if (prevPt == (None, None)):
+        # if (currPt != (None, None)):
+        #     if (prevPt == (None, None)):
+        #             prevPt = currPt
+        #     else:
+        #         # Threshold for jumping points
+        #         if (not (math.sqrt(((currPt[0] - prevPt[0])**2 + (currPt[1] - prevPt[1])**2)) < 100)):
+        #             # If the distance between the two jumps is less than 30 in between two frames, draw/erase
+        #             if (color == "red"):
+        #                 # If red is detected, draw
+        #                 InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
+        #                 pygame.display.flip()
+        #                 prevPt = currPt
+        #             elif (color == "green"):
+        #                 # If green is detected, erase
+        #                 InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
+        #                 pygame.display.flip()
+        #                 prevPt = currPt
+        if (prevPt == (None, None)):
+                prevPt = currPt
+        else:
+            # Threshold for jumping points
+            if (not (math.sqrt(((currPt[0] - prevPt[0])**2 + (currPt[1] - prevPt[1])**2)) < 100)):
+                # If the distance between the two jumps is less than 30 in between two frames, draw/erase
+                if (color == "red"):
+                    # If red is detected, draw
+                    InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
+                    pygame.display.flip()
                     prevPt = currPt
-            else:
-                # Threshold for jumping points
-                if (not (math.sqrt(((currPt[0] - prevPt[0])**2 + (currPt[1] - prevPt[1])**2)) < 100)):
-                    # If the distance between the two jumps is less than 30 in between two frames, draw/erase
-                    if (color == "red"):
-                        # If red is detected, draw
-                        InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
-                        pygame.display.flip()
-                        prevPt = currPt
-                    elif (color == "green"):
-                        # If green is detected, erase
-                        InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
-                        pygame.display.flip()
-                        prevPt = currPt
+                elif (color == "green"):
+                    # If green is detected, erase
+                    InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
+                    pygame.display.flip()
+                    prevPt = currPt
 
     if (fillAftercalibrate):
         screen.fill(BACKGROUND_COLOR)
