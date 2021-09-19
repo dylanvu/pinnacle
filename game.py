@@ -176,13 +176,13 @@ while running:
                 # pygame.display.flip()
                 # prevPt = currPt
 
-    # if (fillAftercalibrate):
-    #     screen.fill(BACKGROUND_COLOR)
-    #     fillAftercalibrate = False
+    if (fillAftercalibrate):
+        screen.fill(BACKGROUND_COLOR)
+        fillAftercalibrate = False
 
-    # if pygame.mouse.get_pressed()[0]:
-    #     cv2.destroyAllWindows()
-    #     running = False
+    if pygame.mouse.get_pressed()[0]:
+        cv2.destroyAllWindows()
+        running = False
 
     # Flip the display
     pygame.display.flip()
