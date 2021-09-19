@@ -93,58 +93,59 @@ while running:
 #     ret2,frame2 = cap.read()
 #     cv2.imshow("depression", frame)
     if (not calibrated):
-        calibrationRadius = 20
-        calibrationIncompleteColor = RED
-        calibrationCompleteColor = BACKGROUND_COLOR
-        # Step 1: draw top left dot and get centroid:
-        # Clean up this ugly mess of if/else later?
-        if (not topLeftcalibrate):
-            DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
-            pygame.display.flip()
-            while (topLeftdot == (None,None)):
-                topLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
-            topLeftcalibrate = True
-#             cv2.imshow("poo", frame)
-            time.sleep(2)
-        else:
-            DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
-            pygame.display.flip()
-            if (not topRightcalibrate):
-                DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
-                pygame.display.flip()
-                while (topRightdot == (None,None)):
-                    topRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
-                topRightcalibrate = True
-                time.sleep(2)
-            else:
-                DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
-                pygame.display.flip()
-                if (not bottomLeftcalibrate):
-                    DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
-                    pygame.display.flip()
-                    while (bottomLeftdot == (None,None)):
-                        bottomLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
-                    bottomLeftcalibrate = True
-                    time.sleep(2)
-                else:
-                    DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
-                    pygame.display.flip()
-                    if (not bottomRightcalibrate):
-                        DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
-                        pygame.display.flip()
-                        while (bottomRightdot == (None,None)):
-                            bottomRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
-                        bottomRightcalibrate = True
-                        time.sleep(2)
-                    else:
-                        DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
-                        pygame.display.flip()
-                        calibrated = True
-                        print(topLeftdot)
-                        print(topRightdot)
-                        print(bottomLeftdot)
-                        print(bottomRightdot)
-                        perspectiveMatrix = CorrectWarping(topLeftdot, topRightdot, bottomLeftdot, bottomRightdot)
+        continue
+#         calibrationRadius = 20
+#         calibrationIncompleteColor = RED
+#         calibrationCompleteColor = BACKGROUND_COLOR
+#         # Step 1: draw top left dot and get centroid:
+#         # Clean up this ugly mess of if/else later?
+#         if (not topLeftcalibrate):
+#             DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+#             pygame.display.flip()
+#             while (topLeftdot == (None,None)):
+#                 topLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+#             topLeftcalibrate = True
+# #             cv2.imshow("poo", frame)
+#             time.sleep(2)
+#         else:
+#             DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+#             pygame.display.flip()
+#             if (not topRightcalibrate):
+#                 DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+#                 pygame.display.flip()
+#                 while (topRightdot == (None,None)):
+#                     topRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+#                 topRightcalibrate = True
+#                 time.sleep(2)
+#             else:
+#                 DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
+#                 pygame.display.flip()
+#                 if (not bottomLeftcalibrate):
+#                     DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
+#                     pygame.display.flip()
+#                     while (bottomLeftdot == (None,None)):
+#                         bottomLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+#                     bottomLeftcalibrate = True
+#                     time.sleep(2)
+#                 else:
+#                     DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
+#                     pygame.display.flip()
+#                     if (not bottomRightcalibrate):
+#                         DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
+#                         pygame.display.flip()
+#                         while (bottomRightdot == (None,None)):
+#                             bottomRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+#                         bottomRightcalibrate = True
+#                         time.sleep(2)
+#                     else:
+#                         DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
+#                         pygame.display.flip()
+#                         calibrated = True
+#                         print(topLeftdot)
+#                         print(topRightdot)
+#                         print(bottomLeftdot)
+#                         print(bottomRightdot)
+#                         perspectiveMatrix = CorrectWarping(topLeftdot, topRightdot, bottomLeftdot, bottomRightdot)
     else:
         # After we are done calibrating, we have our main drawing and detection stuff
         ret,frame = cap.read()
@@ -159,7 +160,8 @@ while running:
         # ((cX,cY),color) = centroidScript(ust) # for no warping
         ((cX,cY),color) = centroidScript(outputFrame) # for warping
 #         cv2.imshow("frame",ust)
-        print(((cX,cY),color))
+        #EMERGENCY PRINT
+        # print(((cX,cY),color))
         currPt = (cX, cY)
         # if (currPt != (None, None)):
         #     if (prevPt == (None, None)):
