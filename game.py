@@ -75,7 +75,7 @@ bottomRightcalibrate = False
 fillAftercalibrate = False
 
 screen.fill(BACKGROUND_COLOR)
-sentence = pygame.image.load("sentence.png")
+sentence = pygame.image.load("sentence.bmp")
 screen.blit(sentence, ((SCREEN_WIDTH - sentence.get_width()) / 2, (SCREEN_HEIGHT - sentence.get_height()) / 2))
 # cv2.imshow("pain", frame)
 while running:
