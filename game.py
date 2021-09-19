@@ -26,8 +26,11 @@ perspectiveMatrix = HardCorrectWarping()
 # SCREEN_HEIGHT = 1000
 # SCREEN_WIDTH = 1850
 
-SCREEN_HEIGHT = 360
-SCREEN_WIDTH = 540
+# SCREEN_HEIGHT = 360
+# SCREEN_WIDTH = 540
+
+SCREEN_HEIGHT = 480
+SCREEN_WIDTH = 720
 
 # Define opencv frame size
 
@@ -162,7 +165,7 @@ while running:
         ((cX,cY),color) = centroidScript(outputFrame) # for warping
 #         cv2.imshow("frame",ust)
         #EMERGENCY PRINT
-        # print(((cX,cY),color))
+        print(((cX,cY),color))
         currPt = (cX, cY)
         if (currPt == (None, None)):
             noneCounter += 1
