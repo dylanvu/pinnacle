@@ -10,6 +10,13 @@ from CalibrateDot import *
 from warpperspective import *
 from hardcodewarp import *
 
+# Variables to change on setup
+calibrated = True
+SCREEN_HEIGHT = 480
+SCREEN_WIDTH = 720
+SCREEN_DIMS = (SCREEN_WIDTH, SCREEN_HEIGHT)
+# remember to edit hard warped .py
+
 # OpenCV setup
 cap = cv2.VideoCapture(0)
 cameraMatrix = np.genfromtxt("./calibration/camera_matrix.txt")
@@ -19,7 +26,7 @@ ret,frame = cap.read() # return a single frame in variable `frame`
 # cv2.imshow("shit", frame)
 h,w = frame.shape[:2]
 newCameraMatrix, roi = cv2. getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h),1, (w,h))
-perspectiveMatrix = HardCorrectWarping()
+perspectiveMatrix = HardCorrectWarping(SCREEN_DIMS)
 
 
 # # Set the pygame window size
@@ -29,8 +36,7 @@ perspectiveMatrix = HardCorrectWarping()
 # SCREEN_HEIGHT = 360
 # SCREEN_WIDTH = 540
 
-SCREEN_HEIGHT = 480
-SCREEN_WIDTH = 720
+
 
 # Define opencv frame size
 
@@ -54,7 +60,6 @@ running = True
 # prevMouse = pygame.mouse.get_pos()
 prevPt = (None, None)
 currPt = (None, None)
-calibrated = False
 noneCounter = 0
 
 # for calibration purposes
