@@ -199,9 +199,10 @@ while running:
                 prevPt = currPt
             elif (color == "green"):
                 # If green is detected, erase
-                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
-                pygame.display.flip()
-                prevPt = currPt
+                screen.fill(BACKGROUND_COLOR)
+                # InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 20)
+                # pygame.display.flip()
+                # prevPt = currPt
 
     if (fillAftercalibrate):
         screen.fill(BACKGROUND_COLOR)
