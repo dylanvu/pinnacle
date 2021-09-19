@@ -61,7 +61,7 @@ while(True):
     try:
         cnts, hierarchy = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
         if len(cnts)> 0:
-            cnt = sorted(cnts, key=cv2.contourArea)
+            cnts = sorted(cnts, key=cv2.contourArea)
             c1 = cnts[0]
             (cX,cY),radius = cv2.minEnclosingCircle(c1)
             cX = int(cX)
@@ -72,9 +72,9 @@ while(True):
         cX = -1
         cY = -1
     print(countG,countR)
-    if countG > 30:
+    if countG > 20:
         print(cX,cY,"green")
-    elif countR > 25:
+    elif countR > 4:
         print(cX,cY,"red")
     else:
         print(cX,cY,"none")
