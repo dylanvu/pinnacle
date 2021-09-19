@@ -9,5 +9,5 @@ def CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi):
     x, y, w, h = roi
     ust = ust[y:y+h, x:x+w]
     ((cX,cY), color) = centroidScript(ust)
-    time.sleep(0.5)
+    print(((cX,cY), color))
     return (cX, cY)

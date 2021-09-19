@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import time
 #will output x,y,colorString
-def centroidScript():
+def centroidScript(frame):
     lower_color_green = (0, 90, 20)
     upper_color_green = (90,255,135)
     maskGreen = cv2.inRange(frame,lower_color_green,upper_color_green)
@@ -15,8 +15,8 @@ def centroidScript():
     #
     # countG =0
 
-    lower_color_red = (40, 15, 110) #180
-    upper_color_red = (90, 70,255)
+    lower_color_red = (40, 10, 120) #40, 0 120
+    upper_color_red = (104, 83,255)
     maskRed = cv2.inRange(frame,lower_color_red,upper_color_red)
     res2 = cv2.bitwise_and(frame,frame, mask= maskRed)
     mask_rgb = cv2.cvtColor(maskRed,cv2.COLOR_GRAY2BGR)
@@ -29,10 +29,10 @@ def centroidScript():
     res = cv2.bitwise_or(thresh,thresh1)
     cX = -1
     cY = -1
-    # cv2.imshow("res",res) TODO
+#     cv2.imshow("res",res)
     try:
         cnts, hierarchy = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-        if len(cnts) > 1:
+        if len(cnts) > 0:
             cnt = sorted(cnts, key=cv2.contourArea)
             c1 = cnts[0]
             (cX,cY),radius = cv2.minEnclosingCircle(c1)
@@ -45,9 +45,9 @@ def centroidScript():
         cX = -1
         cY = -1
     # print(countG,countR)
-    if countG > 1:
-        return(cX,cY,"green")
-    elif countR > 1:
-        return(cX,cY,"red")
+    if countG > 30:
+        return((cX,cY),"green")
+    elif countR > 25:
+        return((cX,cY),"red")
     else:
         return((None,None),None)

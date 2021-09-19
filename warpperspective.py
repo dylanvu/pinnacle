@@ -15,7 +15,7 @@ def CorrectWarping(topLeft, topRight, bottomLeft, bottomRight):
     bottomRightx = bottomRight[0]
     bottomRighty = bottomRight[1]
 
-    correctWidth, correctHeight = 1280,720
+    correctWidth, correctHeight = 1080,720
 
     points1 = np.float32([[topLeftx, topLefty], [topRightx, topRighty], [bottomLeftx, bottomLefty], [bottomRightx, bottomRighty]])
     points2 = np.float32([[0,0], [correctWidth, 0], [0, correctHeight], [correctWidth,correctHeight]])

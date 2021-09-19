@@ -14,6 +14,7 @@ cameraMatrix = np.genfromtxt("./calibration/camera_matrix.txt")
 dist = np.genfromtxt("./calibration/distortion.txt")
 ret,frame = cap.read() # return a single frame in variable `frame`
     # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+# cv2.imshow("shit", frame)
 h,w = frame.shape[:2]
 newCameraMatrix, roi = cv2. getOptimalNewCameraMatrix(cameraMatrix, dist, (w,h),1, (w,h))
 perspectiveMatrix = None
@@ -23,17 +24,19 @@ perspectiveMatrix = None
 # SCREEN_HEIGHT = 1000
 # SCREEN_WIDTH = 1850
 
-SCREEN_HEIGHT = 480
-SCREEN_WIDTH = 720
+SCREEN_HEIGHT = 360
+SCREEN_WIDTH = 540
 
 # Define opencv frame size
 
-FRAMESIZE = (1280,720)
+FRAMESIZE = (1080,720)
 
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
-BACKGROUND_COLOR = pygame.Color(251, 251, 248)
-BLACK = pygame.Color(0, 0, 0)
+# BACKGROUND_COLOR = pygame.Color(251, 251, 248)
+BACKGROUND_COLOR = pygame.Color(0, 0, 0)
+# BLACK = pygame.Color(0, 0, 0)
+BLACK = pygame.Color(255,255,255)
 RED = pygame.Color(255, 0, 0)
 GREEN = pygame.Color(0, 255, 0)
 LIGHTGRAY = pygame.Color(139, 146, 153)
@@ -45,7 +48,7 @@ running = True
 # prevMouse = pygame.mouse.get_pos()
 prevPt = (None, None)
 currPt = (None, None)
-calibrated = False
+calibrated = True
 
 # for calibration purposes
 topLeftdot = (None,None)
@@ -60,7 +63,7 @@ bottomRightcalibrate = False
 fillAftercalibrate = False
 
 screen.fill(BACKGROUND_COLOR)
-
+# cv2.imshow("pain", frame)
 while running:
 
 
@@ -82,7 +85,8 @@ while running:
             if event.key == pygame.K_q:
                 cv2.destroyAllWindows()
                 running = False
-
+#     ret2,frame2 = cap.read()
+#     cv2.imshow("depression", frame)
     if (not calibrated):
         calibrationRadius = 20
         calibrationIncompleteColor = RED
@@ -92,32 +96,41 @@ while running:
         if (not topLeftcalibrate):
             DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
             pygame.display.flip()
-            topLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+            while (topLeftdot == (None,None)):
+                topLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
             topLeftcalibrate = True
+#             cv2.imshow("poo", frame)
+            time.sleep(2)
         else:
             DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, 0 + calibrationRadius, calibrationRadius)
             pygame.display.flip()
             if (not topRightcalibrate):
                 DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
                 pygame.display.flip()
-                topRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+                while (topRightdot == (None,None)):
+                    topRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
                 topRightcalibrate = True
+                time.sleep(2)
             else:
                 DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, 0 + calibrationRadius, calibrationRadius)
                 pygame.display.flip()
                 if (not bottomLeftcalibrate):
                     DrawDot(screen, calibrationIncompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
                     pygame.display.flip()
-                    bottomLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+                    while (bottomLeftdot == (None,None)):
+                        bottomLeftdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
                     bottomLeftcalibrate = True
+                    time.sleep(2)
                 else:
                     DrawDot(screen, calibrationCompleteColor, 0 + calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
                     pygame.display.flip()
                     if (not bottomRightcalibrate):
                         DrawDot(screen, calibrationIncompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
                         pygame.display.flip()
-                        bottomRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
+                        while (bottomRightdot == (None,None)):
+                            bottomRightdot = CalibrateDot(cap, frame, cameraMatrix, dist, newCameraMatrix, roi)
                         bottomRightcalibrate = True
+                        time.sleep(2)
                     else:
                         DrawDot(screen, calibrationCompleteColor, SCREEN_WIDTH - calibrationRadius, SCREEN_HEIGHT - calibrationRadius, calibrationRadius)
                         pygame.display.flip()
@@ -129,15 +142,17 @@ while running:
                         perspectiveMatrix = CorrectWarping(topLeftdot, topRightdot, bottomLeftdot, bottomRightdot)
     else:
         # After we are done calibrating, we have our main drawing and detection stuff
+        ret,frame = cap.read()
         ust = cv2.undistort(frame, cameraMatrix, dist, None, newCameraMatrix)
         x, y, w, h = roi
         ust = ust[y:y+h, x:x+w]
 
         # correct warping
-        print(ust)
-        outputFrame = cv2.warpPerspective(frame, perspectiveMatrix, FRAMESIZE)
-        cv2.imshow(outputFrame)
-        ((cX,cY),color) = centroidScript(outputFrame)
+#         print(ust)
+#         outputFrame = cv2.warpPerspective(ust, perspectiveMatrix, FRAMESIZE)
+#         cv2.imshow("output",outputFrame)
+        ((cX,cY),color) = centroidScript(ust) #outputFrame
+#         cv2.imshow("frame",ust)
         print(((cX,cY),color))
         currPt = (cX, cY)
         if (prevPt == (None, None)):
@@ -146,9 +161,11 @@ while running:
             if (color == "red"):
                 InterpolatePoints(screen, BLACK, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
                 pygame.display.flip()
+                prevPt = currPt
             elif (color == "green"):
-                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 5)
+                InterpolatePoints(screen, BACKGROUND_COLOR, prevPt[0], prevPt[1], currPt[0], currPt[1], 10)
                 pygame.display.flip()
+                prevPt = currPt
 
     if (fillAftercalibrate):
         screen.fill(BACKGROUND_COLOR)
