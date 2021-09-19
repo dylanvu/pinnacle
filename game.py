@@ -70,26 +70,26 @@ screen.fill(BACKGROUND_COLOR)
 while running:
 
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            cv2.destroyAllWindows()
-            running = False
+    # for event in pygame.event.get():
+    #     if event.type == pygame.QUIT:
+    #         cv2.destroyAllWindows()
+    #         running = False
         
-        if event.type == pygame.KEYDOWN:
-            # Panning
-            # if event.key == pygame.K_LEFT:
-            #     Pan(screen, -10, 0, BACKGROUND_COLOR)
-            # if event.key == pygame.K_RIGHT:
-            #     Pan(screen, 10, 0, BACKGROUND_COLOR)
-            # if event.key == pygame.K_UP:
-            #     Pan(screen, 0, -10, BACKGROUND_COLOR)
-            # if event.key == pygame.K_DOWN:
-            #     Pan(screen, 0, 10, BACKGROUND_COLOR)
-            if event.key == pygame.K_UP:
-                screen.fill(BACKGROUND_COLOR)
-            if event.key == pygame.K_q:
-                cv2.destroyAllWindows()
-                running = False
+    #     if event.type == pygame.KEYDOWN:
+    #         # Panning
+    #         # if event.key == pygame.K_LEFT:
+    #         #     Pan(screen, -10, 0, BACKGROUND_COLOR)
+    #         # if event.key == pygame.K_RIGHT:
+    #         #     Pan(screen, 10, 0, BACKGROUND_COLOR)
+    #         # if event.key == pygame.K_UP:
+    #         #     Pan(screen, 0, -10, BACKGROUND_COLOR)
+    #         # if event.key == pygame.K_DOWN:
+    #         #     Pan(screen, 0, 10, BACKGROUND_COLOR)
+    #         if event.key == pygame.K_UP:
+    #             screen.fill(BACKGROUND_COLOR)
+    #         if event.key == pygame.K_q:
+    #             cv2.destroyAllWindows()
+    #             running = False
 #     ret2,frame2 = cap.read()
 #     cv2.imshow("depression", frame)
     if (not calibrated):
@@ -207,6 +207,10 @@ while running:
     if (fillAftercalibrate):
         screen.fill(BACKGROUND_COLOR)
         fillAftercalibrate = False
+
+    if pygame.mouse.get_pressed()[0]:
+        cv2.destroyAllWindows()
+        running = False
 
     # Flip the display
     pygame.display.flip()
