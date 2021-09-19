@@ -47,7 +47,7 @@ def centroidScript(frame):
     # print(countG,countR)
     if countG > 20:
         return((cX,cY),"green")
-    elif countR > 15:
+    elif countR > 25:
         return((cX,cY),"red")
     else:
         return((None,None),None)
