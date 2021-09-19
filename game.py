@@ -167,6 +167,8 @@ while running:
             noneCounter += 1
             if (noneCounter >= 16):
                 prevPt = (None, None)
+        else:
+            noneCounter = 0
         # if (currPt != (None, None)):
         #     if (prevPt == (None, None)):
         #             prevPt = currPt
