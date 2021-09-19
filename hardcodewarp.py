@@ -7,7 +7,7 @@ def HardCorrectWarping(SCREEN_DIMS):
     correctWidth = SCREEN_DIMS[0]
     correctHeight = SCREEN_DIMS[1]
 
-    points1 = np.float32([[159, 81], [522, 80], [193, 320], [522, 291]])
+    points1 = np.float32([[140, 65], [506, 46], [148, 266], [502, 261]])
     points2 = np.float32([[0,0], [correctWidth, 0], [0, correctHeight], [correctWidth,correctHeight]])
 
     correctedMatrix = cv2.getPerspectiveTransform(points1, points2)
