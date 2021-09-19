@@ -33,8 +33,8 @@ def centroidScript(frame):
     try:
         cnts, _ = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
         if len(cnts) > 0:
-            cnt = sorted(cnts, key=cv2.contourArea)
-            c1 = cnt[0]
+            # cnt = sorted(cnts, key=cv2.contourArea)
+            c1 = cnts[0]
             (cX,cY),radius = cv2.minEnclosingCircle(c1)
             cX = int(cX)
             cY = int(cY)
