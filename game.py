@@ -164,7 +164,9 @@ while running:
         # print(((cX,cY),color))
         currPt = (cX, cY)
         if (currPt == (None, None)):
-            prevPt = (None, None)
+            noneCounter += 1
+            if (noneCounter >= 16):
+                prevPt = (None, None)
         # if (currPt != (None, None)):
         #     if (prevPt == (None, None)):
         #             prevPt = currPt
